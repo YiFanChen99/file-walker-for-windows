@@ -1,0 +1,8 @@
+
+Logging 哪些檔案被檢查/被處理。
+
+合併 RemoveDirectories.py
+
+新增爬檔名輸出者
+
+不再從執行目錄走訪，改由給定的 dir_path 開始。
