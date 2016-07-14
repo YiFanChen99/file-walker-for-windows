@@ -5,7 +5,7 @@
 import os
 from ModelUtility.Settings import OPERATION
 from ModelUtility.CommonValue import CURRENT_PATH
-from Model.Walker import walk_and_call_action
+from Model.Walker import Walker
 from Model.OperatorFactory import create_operator
 
 
@@ -16,7 +16,8 @@ if __name__ == '__main__':
     message_execution = "Sure to execute? (1:Y 0:N)"
     isExecute = int(input(message_execution))
     if isExecute:
-        walk_and_call_action(operator, CURRENT_PATH)
+        walker = Walker()
+        walker.walk_and_call_action(operator, CURRENT_PATH)
         print("Action done.")
     else:
         print("Action skipped.")
