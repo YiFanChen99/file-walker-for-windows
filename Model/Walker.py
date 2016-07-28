@@ -1,37 +1,67 @@
 # -*- coding: utf-8 -*-
 import os
-from ModelUtility.Settings import IGNORED_DIR_PREFIX, IGNORED_EXTENSION, FILE_PROCESS_LOG, IS_LOG_IGNORED_DIR, IS_LOG_IGNORED_FILE
+from ModelUtility.Settings import IGNORED_DIR_PREFIX, IGNORED_EXTENSION, FILE_PROCESS_LOG,\
+    IS_LOG_IGNORED
 from ModelUtility.Filename import Filename
 from Model.Logger import Logger
 
 
 class Walker(object):
-    def __init__(self, file_log=FILE_PROCESS_LOG):
-        self.logger = Logger(file_log)
-
-    def walk_and_call_action(self, the_operator, path):
-        for dirpath, dirnames, filenames in os.walk(path):
-            self.drop_ignored_dir(dirnames)
-            for filename in filenames:
-                if not self.is_ignored_file(filename):
-                    the_operator.action(dirpath, Filename(filename))
-                    self.logger.add_acted_file(dirpath, filename)
-                else:
-                    self.logger.add_ignored_file(dirpath, filename)
-        self.logger.export(the_operator, IS_LOG_IGNORED_DIR, IS_LOG_IGNORED_FILE)
-
-    def drop_ignored_dir(self, dirnames):
-        """ Remove dir that should be ignored from list. """
-        dirnames[:] = [dirname for dirname in dirnames if not self.is_ignored_dir(dirname)]
-
-    def is_ignored_dir(self, dirname):
-        """ Check whether dirname start with IGNORED_DIR_PREFIX. """
-        is_ignored = any(prefix for prefix in IGNORED_DIR_PREFIX if dirname.startswith(prefix))
-        if is_ignored:
-            self.logger.add_ignored_dir(dirname)
-        return is_ignored
+    @staticmethod
+    def get_id():
+        raise Exception('Did not override method get_id.')
 
     @staticmethod
-    def is_ignored_file(filename):
-        """ Check whether filename has extension in IGNORED_EXTENSION. """
-        return Filename(filename).extension in IGNORED_EXTENSION
+    def get_description():
+        raise Exception('Did not override method get_description.')
+
+    @staticmethod
+    def get_config():
+        raise Exception('Did not override method get_config.')
+
+    def __init__(self, file_log=FILE_PROCESS_LOG):
+        self.logger = Logger(file_log)
+        self.ignored_dir_prefix = IGNORED_DIR_PREFIX
+        self.ignored_extension = IGNORED_EXTENSION
+
+    def walk_and_action(self, path):
+        for dirpath, dirnames, filenames in os.walk(path):
+            self.judge_dirnames(dirpath, dirnames)
+            self.judge_filenames(dirpath, filenames)
+        self.logger.export(self, IS_LOG_IGNORED)
+
+    def judge_dirnames(self, dirpath, dirnames):
+        acted_dirs = []
+        for dirname in dirnames:
+            if not self.is_ignored_dir(dirname):
+                if self.action_dir(dirpath, dirname):
+                    acted_dirs.append(dirname)
+            else:
+                self.logger.add_ignored(dirpath, dirname)
+        """ Remove dir that should be ignored from list. """
+        dirnames[:] = acted_dirs
+
+    def judge_filenames(self, dirpath, filenames):
+        for filename in filenames:
+            if not self.is_ignored_file(filename):
+                self.action_file(dirpath, Filename(filename))
+            else:
+                self.logger.add_ignored(dirpath, filename)
+
+    # noinspection PyMethodMayBeStatic, PyUnusedLocal
+    def action_dir(self, dirpath, dirname):
+        """ @Templete Method. Return True if this dir should be walked. """
+        return True
+
+    # noinspection PyMethodMayBeStatic
+    def action_file(self, dirpath, filename):
+        """ @Templete Method. """
+        pass
+
+    def is_ignored_dir(self, dirname):
+        """ Check whether dirname start with ignored dir-prefix. """
+        return any(prefix for prefix in self.ignored_dir_prefix if dirname.startswith(prefix))
+
+    def is_ignored_file(self, filename):
+        """ Check whether filename has extension in ignored extension. """
+        return Filename(filename).extension in self.ignored_extension

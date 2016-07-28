@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from Model.Walker import Walker
 from ModelUtility.CommonValue import CURRENT_PATH, TXT_FILE_CREATOR_ID
 from ModelUtility.Settings import NEW_FILE_AT_TOP
 
 
-class TxtFileCreator(object):
+class TxtFileCreator(Walker):
     @staticmethod
     def get_id():
         return TXT_FILE_CREATOR_ID
@@ -13,8 +14,17 @@ class TxtFileCreator(object):
         return "Creating empty txt file for each file."
 
     @staticmethod
-    def action(dir_path, filename):
+    def get_config():
+        return {}
+
+    def __init__(self, **kwargs):
+        Walker.__init__(self, **kwargs)
+        # Avoiding cleanup txt file
+        self.ignored_extension.append('.txt')
+
+    def action_file(self, dir_path, filename):
         TxtFileCreator.create_txt_file(dir_path, filename.simple_name)
+        self.logger.add_acted(dir_path, filename.name)
 
     @staticmethod
     def create_txt_file(dir_path, simple_filename):
@@ -24,6 +34,6 @@ class TxtFileCreator(object):
 
     @staticmethod
     def compose_file_path(dir_path, simple_filename):
-        corresponding_dirpath = CURRENT_PATH if NEW_FILE_AT_TOP else \
+        corresponding_dir_path = CURRENT_PATH if NEW_FILE_AT_TOP else \
             (dir_path if dir_path == CURRENT_PATH else dir_path + '/')
-        return "{0}{1}.txt".format(corresponding_dirpath, simple_filename)
+        return "{0}{1}.txt".format(corresponding_dir_path, simple_filename)
