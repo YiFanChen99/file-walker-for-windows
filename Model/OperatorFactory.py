@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from Model.DirectoryRemover import DirectoryRemover
-from Model.TxtFileCreator import TxtFileCreator
+from Model.Actor.DirectoryRemover import DirectoryRemover
+from Model.Actor.TxtFileCreator import TxtFileCreator
 
 OPERATORS = [TxtFileCreator, DirectoryRemover]
 

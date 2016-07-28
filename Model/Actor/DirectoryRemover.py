@@ -2,7 +2,7 @@
 import os.path
 import shutil
 
-from Model.Walker import Walker
+from Model.Actor.Walker import Walker
 from ModelUtility.CommonValue import DIRECTORY_REMOVER_ID
 from ModelUtility.Settings import TARGET_NAME
 

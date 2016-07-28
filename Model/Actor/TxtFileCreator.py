@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Model.Walker import Walker
+from Model.Actor.Walker import Walker
 from ModelUtility.CommonValue import CURRENT_PATH, TXT_FILE_CREATOR_ID
 from ModelUtility.Settings import NEW_FILE_AT_TOP
 
