@@ -1,7 +1,2 @@
 
-新增爬檔名輸出者
-
 不再從執行目錄走訪，改由給定的 dir_path 開始。
-
-
-新增 DoNothing actor

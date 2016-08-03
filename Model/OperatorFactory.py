@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from Model.Actor.DirectoryRemover import DirectoryRemover
 from Model.Actor.TxtFileCreator import TxtFileCreator
+from Model.Actor.DoNothing import DoNothing
 
-OPERATORS = [TxtFileCreator, DirectoryRemover]
+OPERATORS = [TxtFileCreator, DirectoryRemover, DoNothing]
 
 
 def create_operator(operator_id):

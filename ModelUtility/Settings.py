@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-OPERATION = 'dirr'
+OPERATION = 'don'
 
 IGNORED_DIR_PREFIX = ['.', '_']  # 預設不處理的目錄之前綴
 IGNORED_EXTENSION = ['.py', '.pyc', '', '.md']  # 預設不處理的檔案類型
