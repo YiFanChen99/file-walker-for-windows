@@ -28,7 +28,7 @@ class Walker(object):
         for dirpath, dirnames, filenames in os.walk(path):
             self.judge_dirnames(dirpath, dirnames)
             self.judge_filenames(dirpath, filenames)
-        self.logger.export(self, IS_LOG_IGNORED)
+        self.logger.export(self, path, IS_LOG_IGNORED)
 
     def judge_dirnames(self, dirpath, dirnames):
         acted_dirs = []

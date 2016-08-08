@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from Model.Actor.Walker import Walker
-from ModelUtility.CommonValue import CURRENT_PATH, TXT_FILE_CREATOR_ID
+from ModelUtility.CommonValue import EXE_PATH, TXT_FILE_CREATOR_ID
 from ModelUtility.Settings import NEW_FILE_AT_TOP
 
 
@@ -34,6 +34,6 @@ class TxtFileCreator(Walker):
 
     @staticmethod
     def compose_file_path(dir_path, simple_filename):
-        corresponding_dir_path = CURRENT_PATH if NEW_FILE_AT_TOP else \
-            (dir_path if dir_path == CURRENT_PATH else dir_path + '/')
+        corresponding_dir_path = EXE_PATH if NEW_FILE_AT_TOP else \
+            (dir_path if dir_path == EXE_PATH else dir_path + '/')
         return "{0}{1}.txt".format(corresponding_dir_path, simple_filename)
