@@ -3,14 +3,14 @@ import os.path
 import shutil
 
 from Model.Actor.Walker import Walker
-from ModelUtility.CommonValue import DIRECTORY_REMOVER_ID
+from ModelUtility.CommonValue import OP
 from ModelUtility.Settings import TARGET_NAME
 
 
 class DirectoryRemover(Walker):
     @staticmethod
     def get_id():
-        return DIRECTORY_REMOVER_ID
+        return OP.DIRECTORY_REMOVER
 
     @staticmethod
     def get_description():

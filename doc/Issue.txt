@@ -1,3 +1,3 @@
-
-���S�����L .txt �ɮ׮ɡATxtFileCreator �N�|��Ҧ��� .txt �M�š]�Q�ť����мg�^�A�O�_���w��䵹���u�O�_�мg�v�]�w�H
-	���ΡA�� operator ���ӥû����L txt �ɡA���ݭn���������䥲�w���L txt �ɪ��]�w�C
+﻿
+當沒有略過 .txt 檔案時，TxtFileCreator 將會把所有的 .txt 清空（被空白檔覆寫），是否應針對其給予「是否覆寫」設定？
+	不用，該 operator 應該永遠略過 txt 檔，有需要時應給予其必定略過 txt 檔的設定。

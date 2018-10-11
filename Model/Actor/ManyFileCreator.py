@@ -2,14 +2,14 @@
 import os.path
 
 from Model.Actor.Walker import Walker
-from ModelUtility.CommonValue import MANY_FILE_CREATOR_ID
+from ModelUtility.CommonValue import OP
 from ModelUtility.Settings import TARGET_NAME, REPETITION
 
 
 class ManyFileCreator(Walker):
     @staticmethod
     def get_id():
-        return MANY_FILE_CREATOR_ID
+        return OP.MANY_FILE_CREATOR
 
     @staticmethod
     def get_description():

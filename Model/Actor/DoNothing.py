@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from Model.Actor.Walker import Walker
-from ModelUtility.CommonValue import DO_NOTHING_ID
+from ModelUtility.CommonValue import OP
 
 
 class DoNothing(Walker):
     @staticmethod
     def get_id():
-        return DO_NOTHING_ID
+        return OP.DO_NOTHING
 
     @staticmethod
     def get_description():

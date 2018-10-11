@@ -12,4 +12,4 @@ def create_operator(operator_id):
     if operator_id in operator_map:
         return operator_map[operator_id]()
     else:
-        raise Exception("Operation id not found.")
+        raise ValueError("Operation id not found.")

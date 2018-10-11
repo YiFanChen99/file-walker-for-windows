@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from Model.Actor.Walker import Walker
-from ModelUtility.CommonValue import EXE_PATH, TXT_FILE_CREATOR_ID
+from ModelUtility.CommonValue import EXE_PATH, OP
 from ModelUtility.Settings import NEW_FILE_AT_TOP
 
 
 class TxtFileCreator(Walker):
     @staticmethod
     def get_id():
-        return TXT_FILE_CREATOR_ID
+        return OP.TXT_FILE_CREATOR
 
     @staticmethod
     def get_description():
